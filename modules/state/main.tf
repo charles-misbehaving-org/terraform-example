@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "state_bucket" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm     = "AES256"
+        sse_algorithm = "AES256"
       }
     }
   }
@@ -47,5 +47,9 @@ resource "aws_dynamodb_table" "state_lock" {
 
   lifecycle {
     prevent_destroy = true
+  }
+  server_side_encryption {
+    enabled     = true
+    kms_key_arn = "<Please provide the KMS key arn here>"
   }
 }
